@@ -311,10 +311,93 @@ The odds ratio is approximately how effective the vaccine is. The odds ratio for
 
 ## Druggies
 
+### Barplot
+
+
+```{r}
+dd2 <-  Druguser %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(dd2,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(dd2,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+This plot represents the population of people who answered  Druguser to drug use and the relationship to the contraction of covid-19 while taking either the vaccine or the placebo.
+
+This barplot shows that arounf 89% of the people who answered yes to drug use and recieved the vaccine contracted covid-19. This means that around 11% of the drugusers that only took the placebo ended up getting covid-19.The odds of getting covid-19 while taking the vaccine is 8:1. The drugusers that took the vaccine were very likely to get covid-19 than those taking the placebo.
 
 
 
 
+There are two plots. In first plot,the x-axis represents infected, whether the participants were infected with covid-19 or they were not. The y-axis represents the count, or number of people that got covid-19 or not.
+In the second plot, the one above, The The left two bars of the graph are all the people that got covid-19. The x-axis represents whether a person got covid-19 or not. The y-axis, however, instead of representing the number of people who got covid-19, now represents the percentage of people that got covid-19 after taking the the placebo or taking the Vaccine. 
+
+
+
+
+The codes that  create this plot start with the code block beginning with dd2. dd2 can be seen in the environment pane and if inspected contains 4 variables.These variables include infected, treatment, count, and prcent(stands for percent). The second group of codes is called the basicC. BasicC can also be seen in the environment pane and appears to contain a list of 9 variables. This information creates the first plot. The basicCC is the last bunch of codes and is also in the files pane. It also contains 9 variables and helps to create the percentage plot, the second plot.
+
+### Numerical results
+
+```{r}
+table1 <- xtabs(~infected + treatment, data= Druguser)
+rowPerc(table1)
+colPerc(table1)
+```
+ 
+
+These numerical results show specific percentages of drugusers that got covid-19 after taking the placebo and taking the vaccine.
+The percentage of drug users that took the vaccine and contacted covid-19 is 92% Those that were only given the placebo and got covid-19 was almost 8%. It is clear that the vaccine to prevent covid-19 is not very effective in protecting drug users against covid-19 and so getting this vaccine is not recommended. The odds of getting covid-19 while taking the vaccine is 9:1. The drugusers that took the vaccine were as very likely to get covid-19 than those taking the placebo.
+
+
+### Inferential 
+
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+drugfish <- fisher.test(table1)
+drugfish
+```
+
+
+The p-value is 3e-12. This in a small number and with that being said, the conclusion is that these results are unlikely to occur by chance.
+
+The Fishers's Exact Test illustrates that the odds ratio is 0.087
+drug users who got the vaccine were about half as likely to get Covid-19 than drug users that took the placebo.
+
+The null hypothesis is rejected in favor the the alternative. The drug is not effective in preventing the chances of getting covid-19 in drugusers.
+
+
+
+
+```{r}
+effect <- drugfish$p.value/(drugfish$p.value +1)
+effectivenessdrug = drugfish$estimate/(drugfish$estimate +1)*100
+print(effectivenessdrug)
+```
+
+```{r}
+low=(drugfish$conf.int[1]/(drugfish$conf.int[1] +1))*100
+hi=(drugfish$conf.int[2]/(drugfish$conf.int[2] +1))*100
+options(digits=2)
+```
+
+## Effectiveness Confidence Interval `r low`  to `r hi`
+
+
+Above, is the effectiveness for the covid-19 for guys. If the effectiveness is above 50% that means that the vaccine is effective. Based on the interval seen above, we can conclude that the vaccine is not very effective in protecting drug users from getting covid-19. 
+
+The hallmark of an effective vaccine is 8%. This vaccine does not work greatly in protecting drug users from contracting covid-19.
+
+The odds ratio is approximately how effective the vaccine is. The odds ratio for the drug users can be seen above as 8. The effectiveness confidence interval for the drug users is 0.027 to 0.217.
 
 # Overall Results and Conclusions
 
