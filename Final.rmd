@@ -401,7 +401,15 @@ The odds ratio is approximately how effective the vaccine is. The odds ratio for
 
 # Overall Results and Conclusions
 
+The covid-19 vaccine was effective in protecting men against the contraction of the disease. The covid-19 effectiveness was `r effectivenessguy`
+for men.
+The covid-19 vaccine was pretty successful in protecting women against covid-19.The covid-19 effectiveness was `r effectivenessgal`. women were protected the third most with this particular vaccine.
+The covid-19 vaccine was very effective in treating people who identified as gay. The individuals who identified as gay and took the vaccine were 0.05 times as likely to get covid-19 than those taking the placebo.The covid-19 effectiveness was `r effectivenessgays` for gay individuals.
+The individuals that were drugusers were not effectively protected by the vaccine though not quite as much as the gals(women), guys(men), and Gays(LGBTQ). 
+The drugusers that took the vaccine were the most likely to get covid-19 than those taking the placebo.The covid-19 effectiveness was `r effectivenessdrug` for drugusers.
 
+If you are a male or identify as gay it is recommended to receive the vaccine. However, if you are a female or a drug user, the vaccine was reported to have been not been as effective or almost not effective.
+The null that there is no difference in taking the vaccine can be accepted to the categories including drug users. the alternative, that the vaccine works and is effective, can be accepted for the gals(women), guys(men), and gays(LGBTQ).
 
 
 
